@@ -16,73 +16,107 @@ export const setDiscOnBoard = (
   }
 };
 
+const discNumberToWin = 4;
+const rowNumber = 6;
+const colNumber = 7;
+
+const checkValidCondition = (
+  board: Array<Array<number>>,
+  r: number,
+  c: number,
+  i: number,
+  validation: string
+) => {
+  switch (validation) {
+    case 'vertical':
+      return board[r][c] === board[r - i][c];
+    case 'horizontal':
+      return board[r][c] === board[r][c + i];
+    case 'diagonalRight':
+      return board[r][c] === board[r - i][c + i];
+    case 'diagonalLeft':
+      return board[r][c] === board[r - i][c - i];
+    default:
+      return false;
+  }
+};
+
+const checkDiscOnBoard = (
+  board: Array<Array<number>>,
+  r: number,
+  c: number,
+  validation: string
+) => {
+  let discOnBoardArray: boolean[] = [];
+  for (let i = 1; i < discNumberToWin; i++) {
+    discOnBoardArray.push(checkValidCondition(board, r, c, i, validation));
+  }
+  return discOnBoardArray.every((v) => v === true);
+};
+
 const checkVertical = (board: Array<Array<number>>) => {
-  for (let r = 3; r < 6; r++) {
-    for (let c = 0; c < 7; c++) {
+  let checkVerticalResult = 0;
+  for (let r = discNumberToWin - 1; r < rowNumber; r++) {
+    for (let c = 0; c < colNumber; c++) {
       if (board[r][c]) {
-        if (
-          board[r][c] === board[r - 1][c] &&
-          board[r][c] === board[r - 2][c] &&
-          board[r][c] === board[r - 3][c]
-        ) {
-          return board[r][c];
+        const checkIfPlayerWin = checkDiscOnBoard(board, r, c, 'vertical');
+        if (checkIfPlayerWin) {
+          checkVerticalResult = board[r][c];
         }
       }
     }
   }
+  return checkVerticalResult;
 };
 
 const checkHorizontal = (board: Array<Array<number>>) => {
-  for (let r = 0; r < 6; r++) {
-    for (let c = 0; c < 4; c++) {
+  let checkHorizontalResult = 0;
+  for (let r = 0; r < rowNumber; r++) {
+    for (let c = 0; c < discNumberToWin; c++) {
       if (board[r][c]) {
-        if (
-          board[r][c] === board[r][c + 1] &&
-          board[r][c] === board[r][c + 2] &&
-          board[r][c] === board[r][c + 3]
-        ) {
-          return board[r][c];
+        const checkIfPlayerWin = checkDiscOnBoard(board, r, c, 'horizontal');
+        if (checkIfPlayerWin) {
+          checkHorizontalResult = board[r][c];
         }
       }
     }
   }
+  return checkHorizontalResult;
 };
 
 const checkDiagonalRight = (board: Array<Array<number>>) => {
-  for (let r = 3; r < 6; r++) {
-    for (let c = 0; c < 4; c++) {
+  let checkDiagonalRightResult = 0;
+  for (let r = discNumberToWin - 1; r < rowNumber; r++) {
+    for (let c = 0; c < discNumberToWin; c++) {
       if (board[r][c]) {
-        if (
-          board[r][c] === board[r - 1][c + 1] &&
-          board[r][c] === board[r - 2][c + 2] &&
-          board[r][c] === board[r - 3][c + 3]
-        ) {
-          return board[r][c];
+        const checkIfPlayerWin = checkDiscOnBoard(board, r, c, 'diagonalRight');
+        if (checkIfPlayerWin) {
+          checkDiagonalRightResult = board[r][c];
         }
       }
     }
   }
+  return checkDiagonalRightResult;
 };
 
 const checkDiagonalLeft = (board: Array<Array<number>>) => {
-  for (let r = 3; r < 6; r++) {
-    for (let c = 3; c < 7; c++) {
+  let checkDiagonalLeftResult = 0;
+  for (let r = discNumberToWin - 1; r < rowNumber; r++) {
+    for (let c = discNumberToWin - 1; c < colNumber; c++) {
       if (board[r][c]) {
-        if (
-          board[r][c] === board[r - 1][c - 1] &&
-          board[r][c] === board[r - 2][c - 2] &&
-          board[r][c] === board[r - 3][c - 3]
-        ) {
-          return board[r][c];
+        const checkIfPlayerWin = checkDiscOnBoard(board, r, c, 'diagonalLeft');
+        if (checkIfPlayerWin) {
+          checkDiagonalLeftResult = board[r][c];
         }
       }
     }
   }
+  return checkDiagonalLeftResult;
 };
 
 const checkDraw = (board: Array<Array<number>>) => {
-  for (let r = 0; r < 6; r++) {
-    for (let c = 0; c < 7; c++) {
+  for (let r = 0; r < rowNumber; r++) {
+    for (let c = 0; c < colNumber; c++) {
       if (board[r][c] === 0) {
         return 0;
       }
