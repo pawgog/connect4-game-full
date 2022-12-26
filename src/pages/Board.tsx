@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import Row from '../components/Row';
 import usePreviousState from '../hooks/usePreviousState';
 import useGetFromLocalStorage from '../hooks/useGetFromLocalStorage';
@@ -52,7 +53,7 @@ const Board = () => {
     localStorage.setItem('gameObject', JSON.stringify(gameDetails));
   };
 
-  const backGame = () => {
+  const undoMove = () => {
     setGameDetails(previousValue);
   };
 
@@ -65,9 +66,10 @@ const Board = () => {
         <Button variant="outlined" color="info" onClick={saveGame}>
           {staticText.saveGame}
         </Button>
-        <Button variant="outlined" color="warning" onClick={backGame}>
-          {staticText.backGame}
+        <Button variant="outlined" color="warning" onClick={undoMove}>
+          {staticText.undoMove}
         </Button>
+        <Link to="/">{staticText.backGame}</Link>
       </S.ButtonBoardStyle>
       <table>
         <tbody>

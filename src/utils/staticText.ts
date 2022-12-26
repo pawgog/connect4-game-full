@@ -2,6 +2,7 @@ export const staticText = {
   newGame: 'New Game',
   saveGame: 'Save Game',
   backGame: 'Back Game',
+  undoMove: 'Undo Last Move',
   draw: 'Draw Game!',
   gameOver: 'Game over! Start a new game.',
   player1: 'Player 1 wins!',
