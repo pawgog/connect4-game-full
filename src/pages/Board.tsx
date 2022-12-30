@@ -69,7 +69,11 @@ const Board = () => {
         <Button variant="outlined" color="warning" onClick={undoMove}>
           {staticText.undoMove}
         </Button>
-        <Link to="/">{staticText.backGame}</Link>
+        <Link to="/">
+          <Button variant="outlined" color="warning">
+            {staticText.restartGame}
+          </Button>
+        </Link>
       </S.ButtonBoardStyle>
       <table>
         <tbody>
