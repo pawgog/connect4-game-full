@@ -9,4 +9,7 @@ export const staticText = {
   gameOver: 'Game over! Start a new game.',
   player1: 'Player 1 wins!',
   player2: 'Player 2 wins!',
+  smallBoard: 'Small (3 in row)',
+  mediumBoard: 'Medium (4 in row)',
+  largeBoard: 'Large (5 in row)',
 };

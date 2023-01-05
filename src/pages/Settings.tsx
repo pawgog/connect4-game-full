@@ -31,17 +31,17 @@ const Settings = ({ boardSize, handleRadioChangeFn }: IProps) => {
           <FormControlLabel
             value="small"
             control={<Radio />}
-            label="Small (3 in row)"
+            label={staticText.smallBoard}
           />
           <FormControlLabel
             value="medium"
             control={<Radio />}
-            label="Medium (4 in row)"
+            label={staticText.mediumBoard}
           />
           <FormControlLabel
             value="large"
             control={<Radio />}
-            label="Large (5 in row)"
+            label={staticText.largeBoard}
           />
         </RadioGroup>
       </FormControl>
