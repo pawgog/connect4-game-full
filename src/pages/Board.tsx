@@ -9,25 +9,31 @@ import {
   checkGameResult,
   cloneBoard,
   setDiscOnBoard,
+  setBoardSize,
 } from '../utils/helpers';
-import { initialGameDetails } from '../utils/staticValue';
+import { setInitialGameDetails } from '../utils/staticValue';
 import { staticText } from '../utils/staticText';
 import { TGameObject } from '../utils/types';
 import * as S from './Board.styled';
 
-const Board = () => {
-  const gameBoardState = useGetFromLocalStorage('gameObject');
+type IProps = {
+  boardSize: string;
+};
+
+const Board = ({ boardSize }: IProps) => {
+  const gameBoardState = useGetFromLocalStorage('gameObject', boardSize);
   const [gameDetails, setGameDetails] = useState<TGameObject>(gameBoardState);
-  const previousValue = usePreviousState(gameDetails);
+  const previousValue = usePreviousState(gameDetails, boardSize);
   const { currentPlayer, winner, board, gameOver, message } = gameDetails;
+  const { rowNumber } = setBoardSize(boardSize);
 
   const playGame = (cell: number) => {
     if (!gameOver) {
       let boardGame = cloneBoard(board);
 
-      setDiscOnBoard(boardGame, currentPlayer, cell);
+      setDiscOnBoard(boardGame, currentPlayer, cell, rowNumber);
 
-      let result = checkAll(boardGame);
+      let result = checkAll(boardGame, boardSize);
       const gameResult = checkGameResult(currentPlayer, result);
 
       setGameDetails((prevState) => ({
@@ -46,7 +52,7 @@ const Board = () => {
 
   const newGame = () => {
     localStorage.removeItem('gameObject');
-    setGameDetails(initialGameDetails);
+    setGameDetails(setInitialGameDetails(boardSize));
   };
 
   const saveGame = () => {

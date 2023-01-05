@@ -4,6 +4,7 @@ export const staticText = {
   saveGame: 'Save Game',
   restartGame: 'Restart Game',
   undoMove: 'Undo Last Move',
+  boardSize: 'Board size',
   draw: 'Draw Game!',
   gameOver: 'Game over! Start a new game.',
   player1: 'Player 1 wins!',

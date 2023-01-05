@@ -1,4 +1,5 @@
 import { staticText } from './staticText';
+import { TBoardSize, TBoardSizeObject } from './types';
 
 export const cloneBoard = (board: Array<Array<number>>) =>
   board.map((boardArray: Array<number>) => [...boardArray]);
@@ -6,9 +7,10 @@ export const cloneBoard = (board: Array<Array<number>>) =>
 export const setDiscOnBoard = (
   boardGame: Array<Array<number>>,
   currentPlayer: number,
-  cell: number
+  cell: number,
+  rowNumber: number
 ) => {
-  for (let row = 5; row >= 0; row--) {
+  for (let row = rowNumber - 1; row >= 0; row--) {
     if (!boardGame[row][cell]) {
       boardGame[row][cell] = currentPlayer;
       break;
@@ -16,9 +18,28 @@ export const setDiscOnBoard = (
   }
 };
 
-const discNumberToWin = 4;
-const rowNumber = 6;
-const colNumber = 7;
+export const setBoardSize = (boardSize: string) => {
+  const discNumberToWin = {
+    small: 3,
+    medium: 4,
+    large: 5,
+  };
+  const rowNumber = {
+    small: 5,
+    medium: 6,
+    large: 7,
+  };
+  const colNumber = {
+    small: 6,
+    medium: 7,
+    large: 8,
+  };
+  return {
+    discNumberToWin: discNumberToWin[boardSize as keyof TBoardSize],
+    rowNumber: rowNumber[boardSize as keyof TBoardSize],
+    colNumber: colNumber[boardSize as keyof TBoardSize],
+  };
+};
 
 const checkValidCondition = (
   board: Array<Array<number>>,
@@ -45,7 +66,8 @@ const checkDiscOnBoard = (
   board: Array<Array<number>>,
   r: number,
   c: number,
-  validation: string
+  validation: string,
+  discNumberToWin: number
 ) => {
   let discOnBoardArray: boolean[] = [];
   for (let i = 1; i < discNumberToWin; i++) {
@@ -54,12 +76,22 @@ const checkDiscOnBoard = (
   return discOnBoardArray.every((v) => v === true);
 };
 
-const checkVertical = (board: Array<Array<number>>) => {
+const checkVertical = (
+  board: Array<Array<number>>,
+  boardSizeObject: TBoardSizeObject
+) => {
+  const { discNumberToWin, rowNumber, colNumber } = boardSizeObject;
   let checkVerticalResult = 0;
   for (let r = discNumberToWin - 1; r < rowNumber; r++) {
     for (let c = 0; c < colNumber; c++) {
       if (board[r][c]) {
-        const checkIfPlayerWin = checkDiscOnBoard(board, r, c, 'vertical');
+        const checkIfPlayerWin = checkDiscOnBoard(
+          board,
+          r,
+          c,
+          'vertical',
+          discNumberToWin
+        );
         if (checkIfPlayerWin) {
           checkVerticalResult = board[r][c];
         }
@@ -69,12 +101,22 @@ const checkVertical = (board: Array<Array<number>>) => {
   return checkVerticalResult;
 };
 
-const checkHorizontal = (board: Array<Array<number>>) => {
+const checkHorizontal = (
+  board: Array<Array<number>>,
+  boardSizeObject: TBoardSizeObject
+) => {
+  const { discNumberToWin, rowNumber } = boardSizeObject;
   let checkHorizontalResult = 0;
   for (let r = 0; r < rowNumber; r++) {
     for (let c = 0; c < discNumberToWin; c++) {
       if (board[r][c]) {
-        const checkIfPlayerWin = checkDiscOnBoard(board, r, c, 'horizontal');
+        const checkIfPlayerWin = checkDiscOnBoard(
+          board,
+          r,
+          c,
+          'horizontal',
+          discNumberToWin
+        );
         if (checkIfPlayerWin) {
           checkHorizontalResult = board[r][c];
         }
@@ -84,12 +126,22 @@ const checkHorizontal = (board: Array<Array<number>>) => {
   return checkHorizontalResult;
 };
 
-const checkDiagonalRight = (board: Array<Array<number>>) => {
+const checkDiagonalRight = (
+  board: Array<Array<number>>,
+  boardSizeObject: TBoardSizeObject
+) => {
+  const { discNumberToWin, rowNumber } = boardSizeObject;
   let checkDiagonalRightResult = 0;
   for (let r = discNumberToWin - 1; r < rowNumber; r++) {
     for (let c = 0; c < discNumberToWin; c++) {
       if (board[r][c]) {
-        const checkIfPlayerWin = checkDiscOnBoard(board, r, c, 'diagonalRight');
+        const checkIfPlayerWin = checkDiscOnBoard(
+          board,
+          r,
+          c,
+          'diagonalRight',
+          discNumberToWin
+        );
         if (checkIfPlayerWin) {
           checkDiagonalRightResult = board[r][c];
         }
@@ -99,12 +151,22 @@ const checkDiagonalRight = (board: Array<Array<number>>) => {
   return checkDiagonalRightResult;
 };
 
-const checkDiagonalLeft = (board: Array<Array<number>>) => {
+const checkDiagonalLeft = (
+  board: Array<Array<number>>,
+  boardSizeObject: TBoardSizeObject
+) => {
+  const { discNumberToWin, rowNumber, colNumber } = boardSizeObject;
   let checkDiagonalLeftResult = 0;
   for (let r = discNumberToWin - 1; r < rowNumber; r++) {
     for (let c = discNumberToWin - 1; c < colNumber; c++) {
       if (board[r][c]) {
-        const checkIfPlayerWin = checkDiscOnBoard(board, r, c, 'diagonalLeft');
+        const checkIfPlayerWin = checkDiscOnBoard(
+          board,
+          r,
+          c,
+          'diagonalLeft',
+          discNumberToWin
+        );
         if (checkIfPlayerWin) {
           checkDiagonalLeftResult = board[r][c];
         }
@@ -114,7 +176,11 @@ const checkDiagonalLeft = (board: Array<Array<number>>) => {
   return checkDiagonalLeftResult;
 };
 
-const checkDraw = (board: Array<Array<number>>) => {
+const checkDraw = (
+  board: Array<Array<number>>,
+  boardSizeObject: TBoardSizeObject
+) => {
+  const { rowNumber, colNumber } = boardSizeObject;
   for (let r = 0; r < rowNumber; r++) {
     for (let c = 0; c < colNumber; c++) {
       if (board[r][c] === 0) {
@@ -125,13 +191,14 @@ const checkDraw = (board: Array<Array<number>>) => {
   return 'draw';
 };
 
-export const checkAll = (board: Array<Array<number>>) => {
+export const checkAll = (board: Array<Array<number>>, boardSize: string) => {
+  const boardSizeObject = setBoardSize(boardSize);
   return (
-    checkVertical(board) ||
-    checkDiagonalRight(board) ||
-    checkDiagonalLeft(board) ||
-    checkHorizontal(board) ||
-    checkDraw(board)
+    checkVertical(board, boardSizeObject) ||
+    checkDiagonalRight(board, boardSizeObject) ||
+    checkDiagonalLeft(board, boardSizeObject) ||
+    checkHorizontal(board, boardSizeObject) ||
+    checkDraw(board, boardSizeObject)
   );
 };
 

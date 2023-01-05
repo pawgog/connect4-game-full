@@ -1,8 +1,9 @@
 import { useRef, useEffect } from 'react';
-import { initialGameDetails } from '../utils/staticValue';
+import { setInitialGameDetails } from '../utils/staticValue';
 import { TGameObject } from '../utils/types';
 
-function usePreviousState(value: TGameObject) {
+function usePreviousState(value: TGameObject, boardSize: string) {
+  const initialGameDetails = setInitialGameDetails(boardSize);
   const ref = useRef(initialGameDetails);
 
   useEffect(() => {

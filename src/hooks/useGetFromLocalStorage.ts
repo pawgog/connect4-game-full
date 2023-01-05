@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import { initialGameDetails } from '../utils/staticValue';
+import { setInitialGameDetails } from '../utils/staticValue';
 import { TGameObject } from '../utils/types';
 
-function useGetFromLocalStorage(
-  key: string,
-  defaultValue = initialGameDetails
-) {
+function useGetFromLocalStorage(key: string, boardSize: string) {
+  const defaultValue = setInitialGameDetails(boardSize);
   const [localStorageItem, setLocalStorageItem] = useState<TGameObject>(() => {
     try {
       const savedItem = localStorage.getItem(key);

@@ -7,6 +7,7 @@ const Home = () => {
   const [boardSize, setBoardSize] = useState('medium');
 
   const handleRadioChange = (e: any) => {
+    localStorage.removeItem('gameObject');
     setBoardSize(e.target.value);
   };
 
@@ -21,7 +22,7 @@ const Home = () => {
           />
         }
       />
-      <Route path="/board" element={<Board />} />
+      <Route path="/board" element={<Board boardSize={boardSize} />} />
     </Routes>
   );
 };
