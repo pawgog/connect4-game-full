@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Settings from './Settings';
 import Board from './Board';
@@ -6,7 +6,9 @@ import Board from './Board';
 const Home = () => {
   const [boardSize, setBoardSize] = useState('medium');
 
-  const handleRadioChange = (e: any) => {
+  const handleRadioChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
     localStorage.removeItem('gameObject');
     setBoardSize(e.target.value);
   };

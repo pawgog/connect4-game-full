@@ -12,7 +12,7 @@ import * as S from './Settings.styled';
 
 type IProps = {
   boardSize: string;
-  handleRadioChangeFn: any;
+  handleRadioChangeFn: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Settings = ({ boardSize, handleRadioChangeFn }: IProps) => {
