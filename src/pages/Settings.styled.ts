@@ -6,4 +6,8 @@ export const SettingsStyled = styled.div`
   align-items: center;
   justify-content: center;
   margin: 10px 0;
+
+  & > a {
+    margin-top: 20px;
+  }
 `;

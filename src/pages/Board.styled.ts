@@ -3,6 +3,13 @@ import { colors } from '../utils/colors';
 import { colorText } from '../utils/colors';
 import { TColorsObject } from '../utils/types';
 
+export const GameInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const BoardStyle = styled.div`
   display: flex;
   flex-direction: column;

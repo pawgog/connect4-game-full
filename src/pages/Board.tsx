@@ -63,35 +63,40 @@ const Board = ({ boardSize }: IProps) => {
     setGameDetails(previousValue);
   };
 
+  console.log('currentPlayer', currentPlayer);
+
   return (
-    <S.BoardStyle>
-      <S.ButtonBoardStyle>
-        <Button variant="outlined" color="info" onClick={newGame}>
-          {staticText.newGame}
-        </Button>
-        <Button variant="outlined" color="info" onClick={saveGame}>
-          {staticText.saveGame}
-        </Button>
-        <Button variant="outlined" color="warning" onClick={undoMove}>
-          {staticText.undoMove}
-        </Button>
-        <Link to="/">
-          <Button variant="outlined" color="warning">
-            {staticText.restartGame}
+    <S.GameInfo>
+      <S.BoardStyle>
+        <S.ButtonBoardStyle>
+          <Button variant="outlined" color="info" onClick={newGame}>
+            {staticText.newGame}
           </Button>
-        </Link>
-      </S.ButtonBoardStyle>
-      <table>
-        <tbody>
-          {board.map((row, i) => (
-            <Row key={i} row={row} playGame={playGame} />
-          ))}
-        </tbody>
-      </table>
-      <S.MessageBoardStyle>
-        <S.MessageStyle $winner={winner}>{message}</S.MessageStyle>
-      </S.MessageBoardStyle>
-    </S.BoardStyle>
+          <Button variant="outlined" color="info" onClick={saveGame}>
+            {staticText.saveGame}
+          </Button>
+          <Button variant="outlined" color="warning" onClick={undoMove}>
+            {staticText.undoMove}
+          </Button>
+          <Link to="/">
+            <Button variant="outlined" color="warning">
+              {staticText.restartGame}
+            </Button>
+          </Link>
+        </S.ButtonBoardStyle>
+        <table>
+          <tbody>
+            {board.map((row, i) => (
+              <Row key={i} row={row} playGame={playGame} />
+            ))}
+          </tbody>
+        </table>
+        <S.MessageBoardStyle>
+          <S.MessageStyle $winner={winner}>{message}</S.MessageStyle>
+        </S.MessageBoardStyle>
+      </S.BoardStyle>
+      <div>{currentPlayer}</div>
+    </S.GameInfo>
   );
 };
 
