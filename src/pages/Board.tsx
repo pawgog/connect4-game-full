@@ -15,6 +15,7 @@ import { setInitialGameDetails } from '../utils/staticValue';
 import { staticText } from '../utils/staticText';
 import { TGameObject } from '../utils/types';
 import { colors } from '../utils/colors';
+import CircleStyle from '../components/Circle.styled';
 import * as S from './Board.styled';
 
 type IProps = {
@@ -100,7 +101,7 @@ const Board = ({ boardSize }: IProps) => {
           </S.MessageBoardStyle>
           <S.CurrentPlayer>
             <span>{staticText.currentPlayer}</span>
-            <S.Circle $color={color} />
+            <CircleStyle $color={color} $size={50} />
           </S.CurrentPlayer>
         </S.BottomBoard>
       </S.BoardStyle>

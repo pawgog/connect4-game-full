@@ -1,4 +1,5 @@
 import { colors } from '../utils/colors';
+import CircleStyle from './Circle.styled';
 import * as S from './Cell.styled';
 
 interface IProps {
@@ -20,7 +21,7 @@ const Cell = ({ value, columnIndex, playGame }: IProps) => {
           playGame(columnIndex);
         }}
       >
-        <S.Circle $color={color} />
+        <CircleStyle $color={color} $size={70} />
       </S.PaperStyle>
     </td>
   );
