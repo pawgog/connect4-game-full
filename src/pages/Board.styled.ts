@@ -10,6 +10,13 @@ export const GameInfo = styled.div`
   justify-content: center;
 `;
 
+export const Circle = styled.div<{ $color: string }>`
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  background-color: ${({ $color }) => $color};
+`;
+
 export const BoardStyle = styled.div`
   display: flex;
   flex-direction: column;

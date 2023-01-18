@@ -14,6 +14,7 @@ import {
 import { setInitialGameDetails } from '../utils/staticValue';
 import { staticText } from '../utils/staticText';
 import { TGameObject } from '../utils/types';
+import { colors } from '../utils/colors';
 import * as S from './Board.styled';
 
 type IProps = {
@@ -26,6 +27,10 @@ const Board = ({ boardSize }: IProps) => {
   const previousValue = usePreviousState(gameDetails, boardSize);
   const { currentPlayer, winner, board, gameOver, message } = gameDetails;
   const { rowNumber } = setBoardSize(boardSize);
+  let color = colors.white;
+
+  if (currentPlayer === 1) color = colors.red;
+  if (currentPlayer === 2) color = colors.yellow;
 
   const playGame = (cell: number) => {
     if (!gameOver) {
@@ -63,8 +68,6 @@ const Board = ({ boardSize }: IProps) => {
     setGameDetails(previousValue);
   };
 
-  console.log('currentPlayer', currentPlayer);
-
   return (
     <S.GameInfo>
       <S.BoardStyle>
@@ -95,7 +98,10 @@ const Board = ({ boardSize }: IProps) => {
           <S.MessageStyle $winner={winner}>{message}</S.MessageStyle>
         </S.MessageBoardStyle>
       </S.BoardStyle>
-      <div>{currentPlayer}</div>
+      <div>
+        {currentPlayer}
+        <S.Circle $color={color} />
+      </div>
     </S.GameInfo>
   );
 };
