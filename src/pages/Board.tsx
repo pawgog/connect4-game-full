@@ -98,10 +98,10 @@ const Board = ({ boardSize }: IProps) => {
           <S.MessageStyle $winner={winner}>{message}</S.MessageStyle>
         </S.MessageBoardStyle>
       </S.BoardStyle>
-      <div>
+      <S.CurrentPlayer>
         {staticText.currentPlayer}
         <S.Circle $color={color} />
-      </div>
+      </S.CurrentPlayer>
     </S.GameInfo>
   );
 };

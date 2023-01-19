@@ -44,3 +44,10 @@ export const MessageStyle = styled.span<{ $winner: number }>`
   font-size: 1.5rem;
   color: ${({ $winner }) => colorText[$winner as keyof TColorsObject]};
 `;
+
+export const CurrentPlayer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-style: italic;
+`;
