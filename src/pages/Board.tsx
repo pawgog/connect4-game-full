@@ -99,7 +99,7 @@ const Board = ({ boardSize }: IProps) => {
         </S.MessageBoardStyle>
       </S.BoardStyle>
       <div>
-        {currentPlayer}
+        {staticText.currentPlayer}
         <S.Circle $color={color} />
       </div>
     </S.GameInfo>
