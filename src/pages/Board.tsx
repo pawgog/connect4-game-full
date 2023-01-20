@@ -94,14 +94,16 @@ const Board = ({ boardSize }: IProps) => {
             ))}
           </tbody>
         </table>
-        <S.MessageBoardStyle>
-          <S.MessageStyle $winner={winner}>{message}</S.MessageStyle>
-        </S.MessageBoardStyle>
+        <S.BottomBoard>
+          <S.MessageBoardStyle>
+            <S.MessageStyle $winner={winner}>{message}</S.MessageStyle>
+          </S.MessageBoardStyle>
+          <S.CurrentPlayer>
+            <span>{staticText.currentPlayer}</span>
+            <S.Circle $color={color} />
+          </S.CurrentPlayer>
+        </S.BottomBoard>
       </S.BoardStyle>
-      <S.CurrentPlayer>
-        {staticText.currentPlayer}
-        <S.Circle $color={color} />
-      </S.CurrentPlayer>
     </S.GameInfo>
   );
 };

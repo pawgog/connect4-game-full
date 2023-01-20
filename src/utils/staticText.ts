@@ -7,7 +7,7 @@ export const staticText = {
   boardSize: 'Board size',
   draw: 'Draw Game!',
   gameOver: 'Game over! Start a new game.',
-  currentPlayer: 'Current Player',
+  currentPlayer: 'Player',
   player1: 'Player 1 wins!',
   player2: 'Player 2 wins!',
   smallBoard: 'Small (3 in row)',

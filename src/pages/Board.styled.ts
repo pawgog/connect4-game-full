@@ -11,8 +11,8 @@ export const GameInfo = styled.div`
 `;
 
 export const Circle = styled.div<{ $color: string }>`
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   border-radius: 50px;
   background-color: ${({ $color }) => $color};
 `;
@@ -25,15 +25,21 @@ export const BoardStyle = styled.div`
   margin: 10px 0;
 `;
 
+export const BottomBoard = styled.div`
+  display: flex;
+  width: 650px;
+  background-color: ${colors.blue};
+`;
+
 export const ButtonBoardStyle = styled.div`
-  width: 720px;
+  width: 650px;
   display: flex;
   justify-content: space-between;
 `;
 
 export const MessageBoardStyle = styled.div`
-  width: 720px;
-  height: 40px;
+  width: 80%;
+  height: 50px;
   text-align: center;
   text-shadow: 1px 1px 8px ${colors.white};
   background-color: ${colors.blue};
@@ -41,15 +47,23 @@ export const MessageBoardStyle = styled.div`
 
 export const MessageStyle = styled.span<{ $winner: number }>`
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: ${({ $winner }) => colorText[$winner as keyof TColorsObject]};
 `;
 
 export const CurrentPlayer = styled.div`
+  position: relative;
+  width: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-style: italic;
+  & > span {
+    position: absolute;
+    top: 14px;
+    font-size: 14px;
+    font-weight: bold;
+  }
   & > div {
     transition: background-color 0.5s ease-out;
   }
