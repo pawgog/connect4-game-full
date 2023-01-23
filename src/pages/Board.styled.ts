@@ -50,4 +50,7 @@ export const CurrentPlayer = styled.div`
   flex-direction: column;
   align-items: center;
   font-style: italic;
+  & > div {
+    transition: background-color 0.5s ease-out;
+  }
 `;
